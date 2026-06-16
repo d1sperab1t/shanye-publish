@@ -60,6 +60,76 @@ export default function Academy() {
         </FadeUp>
       </div>
 
+      {/* 词语解释——无框错落排版 */}
+      <div style={{ position: 'relative', marginBottom: 80, paddingTop: 16 }}>
+
+        {/* 装饰性大字背景 */}
+        <div aria-hidden style={{
+          position: 'absolute', top: -20, right: '6%',
+          fontFamily: 'var(--serif)', fontSize: 'clamp(140px,18vw,240px)',
+          fontWeight: 700, color: 'rgba(201,168,76,0.04)',
+          lineHeight: 1, userSelect: 'none', pointerEvents: 'none', letterSpacing: '-0.02em',
+        }}>山野</div>
+
+        {/* 行 1：山 */}
+        <FadeUp delay={0.05}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 'clamp(24px,3vw,56px)', marginBottom: 'clamp(36px,5vw,64px)', paddingLeft: '2%' }}>
+            <span style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(72px,10vw,130px)', fontWeight: 300, color: 'var(--gold)', lineHeight: 0.9, flexShrink: 0 }}>山</span>
+            <div style={{ paddingBottom: 12, maxWidth: 380 }}>
+              <div style={{ fontSize: 9, letterSpacing: '0.30em', textTransform: 'uppercase', color: 'rgba(201,168,76,0.50)', marginBottom: 10 }}>Mountain</div>
+              <p style={{ fontSize: 'clamp(13px,1.4vw,16px)', color: 'var(--muted)', lineHeight: 2.0, letterSpacing: '0.03em' }}>
+                莫干山是永久的教学场地与精神原点，所有知识从山的现场生发。
+              </p>
+            </div>
+          </div>
+        </FadeUp>
+
+        {/* 行 2：野 — 右偏 */}
+        <FadeUp delay={0.12}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 'clamp(24px,3vw,56px)', marginBottom: 'clamp(36px,5vw,64px)', paddingLeft: '22%', justifyContent: 'flex-start' }}>
+            <div style={{ paddingBottom: 14, maxWidth: 360, textAlign: 'right' }}>
+              <div style={{ fontSize: 9, letterSpacing: '0.30em', textTransform: 'uppercase', color: 'rgba(201,168,76,0.50)', marginBottom: 10 }}>Wild</div>
+              <p style={{ fontSize: 'clamp(13px,1.4vw,16px)', color: 'var(--muted)', lineHeight: 2.0, letterSpacing: '0.03em' }}>
+                户外是唯一的课堂，实操优先，每一堂课都在真实自然中完成。
+              </p>
+            </div>
+            <span style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(72px,10vw,130px)', fontWeight: 300, color: 'rgba(201,168,76,0.80)', lineHeight: 0.9, flexShrink: 0 }}>野</span>
+          </div>
+        </FadeUp>
+
+        {/* 行 3：梦想 — 左，字更大 */}
+        <FadeUp delay={0.18}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'clamp(20px,2.5vw,44px)', marginBottom: 'clamp(36px,5vw,64px)', paddingLeft: '6%' }}>
+            <div style={{ flexShrink: 0, lineHeight: 0.88 }}>
+              <div style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(72px,10vw,130px)', fontWeight: 300, color: 'var(--gold)', display: 'block' }}>梦</div>
+              <div style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(72px,10vw,130px)', fontWeight: 300, color: 'var(--gold)', display: 'block', marginTop: '-0.12em' }}>想</div>
+            </div>
+            <div style={{ paddingTop: 'clamp(16px,2.5vw,36px)', maxWidth: 400 }}>
+              <div style={{ fontSize: 9, letterSpacing: '0.30em', textTransform: 'uppercase', color: 'rgba(201,168,76,0.50)', marginBottom: 12 }}>Dream</div>
+              <p style={{ fontSize: 'clamp(13px,1.4vw,16px)', color: 'var(--muted)', lineHeight: 2.1, letterSpacing: '0.03em' }}>
+                向往狂野、渴望自由生长——山野运动的核心是那个敢于离开舒适地带、奔赴自然的内心冲动。
+              </p>
+            </div>
+          </div>
+        </FadeUp>
+
+        {/* 行 4：家 — 极右，结尾收束 */}
+        <FadeUp delay={0.24}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 'clamp(24px,3vw,56px)', paddingLeft: '40%' }}>
+            <div style={{ paddingBottom: 10, maxWidth: 320 }}>
+              <div style={{ fontSize: 9, letterSpacing: '0.30em', textTransform: 'uppercase', color: 'rgba(201,168,76,0.50)', marginBottom: 10 }}>Home</div>
+              <p style={{ fontSize: 'clamp(13px,1.4vw,16px)', color: 'var(--muted)', lineHeight: 2.0, letterSpacing: '0.03em' }}>
+                以共同价值观聚合的社群，每一位学员都是这个生态的建造者。
+              </p>
+            </div>
+            <span style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(72px,10vw,130px)', fontWeight: 300, color: 'rgba(201,168,76,0.65)', lineHeight: 0.9, flexShrink: 0 }}>家</span>
+          </div>
+        </FadeUp>
+
+        {/* 底部分隔线 */}
+        <div style={{ marginTop: 'clamp(40px,5vw,72px)', height: 1, background: 'var(--line)' }} />
+      </div>
+
       <FadeUp delay={0.1}>
         <div className="academy-courses" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 1, background: 'var(--line)', border: '1px solid var(--line)', marginBottom: 60 }}>
           {courses.map(c => (

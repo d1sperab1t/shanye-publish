@@ -1,4 +1,5 @@
 import FadeUp from './FadeUp'
+import Counter from './Counter'
 
 const races = [
   { img: '/assets/race/race1.jpg', brand: 'HOKA', collab: '× 莫干山山野运动', name: '莫干山越野邀请赛', dist: '30 / 50 km', diff: '★★★★★', date: '2026 · 莫干山 · 浙江德清', status: '报名中', statusClass: 'open', grainId: 'rg1' },
@@ -34,12 +35,31 @@ export default function Race() {
               以莫干山为永久赛场，汇聚国际顶尖运动品牌与本土山野文化。每场赛事不只是竞速，更是一次身体与自然的深度对话。
             </p>
             <div style={{ display: 'flex', gap: 48, borderTop: '1px solid var(--line)', paddingTop: 28 }}>
-              {[{ n: '4+', l: '品牌联名' }, { n: '15–50', l: '公里跨度' }, { n: '2025', l: '首届举办' }].map(s => (
+              {[{ n: '50+', l: '品牌联名' }, { n: '5–150km', l: '公里跨度' }, { n: '2010', l: '首届举办' }].map(s => (
                 <div key={s.l}>
                   <div style={{ fontFamily: 'var(--serif)', fontSize: 44, fontWeight: 300, color: 'var(--gold)', lineHeight: 1, marginBottom: 6 }}>{s.n}</div>
                   <div style={{ fontSize: 10, letterSpacing: '0.20em', textTransform: 'uppercase', color: 'var(--muted)' }}>{s.l}</div>
                 </div>
               ))}
+            </div>
+
+            <div style={{ marginTop: 48, paddingTop: 32, borderTop: '1px solid var(--line)' }}>
+              <div style={{ fontSize: 10, letterSpacing: '0.24em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={{ display: 'block', width: 20, height: 1, background: 'var(--gold)' }}/>
+                累计参赛人员
+              </div>
+              <Counter
+                value={156879}
+                places={[100000, 10000, 1000, 100, 10, 1]}
+                fontSize={52}
+                padding={4}
+                gap={4}
+                textColor="var(--gold)"
+                fontWeight={300}
+                gradientFrom="var(--bg)"
+                counterStyle={{ fontFamily: 'var(--serif)', letterSpacing: '0.06em' }}
+              />
+              <div style={{ fontSize: 10, letterSpacing: '0.18em', color: 'var(--muted)', marginTop: 10, textTransform: 'uppercase' }}>人次 · 历届赛事总计</div>
             </div>
           </div>
         </FadeUp>
@@ -50,7 +70,7 @@ export default function Race() {
           {races.map(r => (
             <div key={r.grainId} style={{
               overflow: 'hidden', background: `#0a0e0a url(${r.img}) center/cover`,
-              position: 'relative', minHeight: 340, display: 'flex', flexDirection: 'column',
+              position: 'relative', height: 'clamp(320px,36vw,500px)', display: 'flex', flexDirection: 'column',
               transition: 'transform 0.4s',
             }}
               onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.005)')}
@@ -66,16 +86,16 @@ export default function Race() {
                 </svg>
               </div>
               <div style={{ background: 'transparent', padding: '20px 28px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'relative', zIndex: 2 }}>
-                <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.22em', color: 'rgba(255,255,255,0.70)', textTransform: 'uppercase' }}>{r.brand}</span>
-                <span style={{ fontSize: 10, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.32)' }}>{r.collab}</span>
+                <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: '0.20em', color: 'rgba(255,255,255,0.95)', textTransform: 'uppercase' }}>{r.brand}</span>
+                <span style={{ fontSize: 11, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.65)' }}>{r.collab}</span>
               </div>
               <div style={{ padding: '24px 28px 36px', flex: 1, position: 'relative', zIndex: 2, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
                 <div style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(28px,3vw,42px)', fontWeight: 300, letterSpacing: '0.06em', color: 'var(--text)', marginBottom: 18, lineHeight: 1.2 }}>{r.name}</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 12 }}>
                   <span style={{ fontSize: 11, letterSpacing: '0.14em', color: 'var(--gold)', border: '1px solid rgba(201,168,76,0.28)', padding: '3px 12px', borderRadius: 2 }}>{r.dist}</span>
-                  <span style={{ fontSize: 10, color: 'rgba(201,168,76,0.55)', letterSpacing: '0.08em' }}>{r.diff}</span>
+                  <span style={{ fontSize: 11, color: 'rgba(201,168,76,0.85)', letterSpacing: '0.08em' }}>{r.diff}</span>
                 </div>
-                <div style={{ fontSize: 11, letterSpacing: '0.14em', color: 'rgba(245,240,232,0.28)', textTransform: 'uppercase', marginBottom: 24 }}>{r.date}</div>
+                <div style={{ fontSize: 11, letterSpacing: '0.14em', color: 'rgba(245,240,232,0.60)', textTransform: 'uppercase', marginBottom: 24 }}>{r.date}</div>
                 <span style={{ display: 'inline-block', fontSize: 10, letterSpacing: '0.18em', padding: '4px 14px', textTransform: 'uppercase', ...statusStyle[r.statusClass] }}>{r.status}</span>
               </div>
             </div>

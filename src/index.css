@@ -3,11 +3,11 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:     #0D1F15;
+  --bg:     #111C14;
   --text:   #F5F0E8;
   --gold:   #C9A84C;
-  --green:  #1C4A2E;
-  --green2: #2E6B46;
+  --green:  #2A5E3C;
+  --green2: #3D7A56;
   --muted:  rgba(245,240,232,0.42);
   --line:   rgba(201,168,76,0.22);
   --serif:  'Noto Serif SC', serif;
@@ -99,4 +99,18 @@ section.full-w {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+}
+
+.hero-typewriter {
+  font-family: var(--serif);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  vertical-align: baseline;
+}
+
+.hero-typewriter .text-type__cursor {
+  color: var(--gold);
+  opacity: 0.7;
+  font-weight: 200;
+  margin-left: 2px;
 }

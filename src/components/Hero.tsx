@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import TextType from './TextType'
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 28 },
@@ -78,7 +79,18 @@ export default function Hero() {
           fontWeight: 300, letterSpacing: '0.05em', lineHeight: 1.10,
           color: 'var(--text)', marginBottom: 24,
         }}>
-          在竹林里<br/>找到<em style={{ fontStyle: 'normal', color: 'var(--gold)' }}>答案</em>
+          在竹林里<br/>找到
+          <TextType
+            as="em"
+            text={['答案', '力量', '节奏', '自由', '边界', '山野', '梦想', '家']}
+            typingSpeed={80}
+            deletingSpeed={45}
+            pauseDuration={1800}
+            showCursor={true}
+            cursorCharacter="|"
+            className="hero-typewriter"
+            style={{ fontStyle: 'normal', color: 'var(--gold)' }}
+          />
         </motion.h1>
 
         <motion.p {...fadeUp(0.35)} style={{
