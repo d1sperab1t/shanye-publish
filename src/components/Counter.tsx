@@ -1,5 +1,5 @@
 import { motion, useSpring, useTransform } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import './Counter.css';
 
 function Number({ mv, number, height }: { mv: ReturnType<typeof useSpring>; number: number; height: number }) {
