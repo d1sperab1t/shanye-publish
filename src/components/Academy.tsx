@@ -1,4 +1,5 @@
 import FadeUp from './FadeUp'
+import Aurora from './Aurora'
 
 const courses = [
   {
@@ -21,17 +22,24 @@ const courses = [
   },
 ]
 
-const levels = [
-  { ico: '📖', lv: 'Lv.1', name: '山野学徒', pts: '0 学分起' },
-  { ico: '🎓', lv: 'Lv.2', name: '山野修者', pts: '80 学分' },
-  { ico: '🏅', lv: 'Lv.3', name: '山野向导', pts: '200 学分' },
-  { ico: '⭐', lv: 'Lv.4', name: '山野导师', pts: '400 学分' },
-]
 
 export default function Academy() {
   return (
-    <section id="academy">
-      <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 'clamp(60px,6vw,120px)', alignItems: 'end', marginBottom: 80 }}>
+    <section id="academy" style={{ position: 'relative' }}>
+      {/* Aurora fills the entire section */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+        <Aurora
+          colorStops={['#7cff67', '#ffd166', '#10B981']}
+          blend={0.5}
+          amplitude={1.0}
+          speed={0.35}
+        />
+      </div>
+      {/* Subtle dark overlay for text legibility */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'rgba(8,20,12,0.45)', pointerEvents: 'none' }} />
+
+      <div style={{ position: 'relative', zIndex: 2, marginBottom: 80 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 'clamp(60px,6vw,120px)', alignItems: 'end' }}>
         <div>
           <FadeUp><div className="sec-label">山野梦想家</div></FadeUp>
           <FadeUp delay={0.1}>
@@ -49,7 +57,7 @@ export default function Academy() {
               山野梦想家是平台的知识主轴，线下小班制课程以莫干山为永久教学场地，课堂讲授与户外实操并行，每门课程都对应一枚可收藏的山野印记。
             </p>
             <div style={{ display: 'flex', gap: 48, borderTop: '1px solid var(--line)', paddingTop: 28 }}>
-              {[{ n: '3', l: '课程系列' }, { n: '4', l: '知学等级' }, { n: '20', l: '人小班制' }].map(s => (
+              {[{ n: '3', l: '课程系列' }, { n: '20', l: '人小班制' }].map(s => (
                 <div key={s.l}>
                   <div style={{ fontFamily: 'var(--serif)', fontSize: 44, fontWeight: 300, color: 'var(--gold)', lineHeight: 1, marginBottom: 6 }}>{s.n}</div>
                   <div style={{ fontSize: 10, letterSpacing: '0.20em', textTransform: 'uppercase', color: 'var(--muted)' }}>{s.l}</div>
@@ -58,10 +66,11 @@ export default function Academy() {
             </div>
           </div>
         </FadeUp>
-      </div>
+      </div>{/* end grid */}
+      </div>{/* end zIndex wrapper */}
 
       {/* 词语解释——无框错落排版 */}
-      <div style={{ position: 'relative', marginBottom: 80, paddingTop: 16 }}>
+      <div style={{ position: 'relative', zIndex: 2, marginBottom: 80, paddingTop: 16 }}>
 
         {/* 装饰性大字背景 */}
         <div aria-hidden style={{
@@ -126,45 +135,33 @@ export default function Academy() {
           </div>
         </FadeUp>
 
-        {/* 底部分隔线 */}
-        <div style={{ marginTop: 'clamp(40px,5vw,72px)', height: 1, background: 'var(--line)' }} />
       </div>
 
-      <FadeUp delay={0.1}>
-        <div className="academy-courses" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 1, background: 'var(--line)', border: '1px solid var(--line)', marginBottom: 60 }}>
-          {courses.map(c => (
-            <div key={c.series} style={{ background: 'var(--bg)', padding: '36px 28px', borderLeft: c.borderLeft ? '1px solid var(--line)' : undefined }}>
-              <div style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 16, opacity: 0.7 }}>{c.series}</div>
-              <div style={{ fontFamily: 'var(--serif)', fontSize: 18, fontWeight: 400, color: 'var(--text)', letterSpacing: '0.04em', marginBottom: 12, lineHeight: 1.4, whiteSpace: 'pre-line' }}>{c.name}</div>
-              <p style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.85 }}>{c.desc}</p>
-            </div>
-          ))}
-        </div>
-      </FadeUp>
-
-      <div style={{ marginTop: 60 }}>
-        <FadeUp><div className="sec-label">山野知学等级</div></FadeUp>
-        <FadeUp delay={0.1}>
-          <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.85, maxWidth: 480, marginBottom: 0 }}>
-            通过学分积累逐级晋升。山野导师可被推荐为莫沃斯峰会讲者，是知识体系的最高荣誉。
-          </p>
-        </FadeUp>
-        <FadeUp delay={0.2}>
-          <div className="levels-track" style={{ display: 'flex', gap: 1, background: 'var(--line)', border: '1px solid var(--line)', marginTop: 48 }}>
-            {levels.map(l => (
-              <div key={l.lv} style={{ flex: 1, padding: '32px 20px', background: 'var(--bg)', textAlign: 'center', transition: 'background 0.3s', cursor: 'default' }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(28,74,46,0.4)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'var(--bg)')}
-              >
-                <div style={{ fontSize: 24, marginBottom: 12 }}>{l.ico}</div>
-                <div style={{ fontSize: 10, letterSpacing: '0.14em', color: 'var(--gold)', opacity: 0.6, marginBottom: 6 }}>{l.lv}</div>
-                <div style={{ fontFamily: 'var(--serif)', fontSize: 14, fontWeight: 400, color: 'var(--text)', letterSpacing: '0.06em', marginBottom: 6 }}>{l.name}</div>
-                <div style={{ fontSize: 11, color: 'var(--muted)' }}>{l.pts}</div>
+      <div style={{ position: 'relative', zIndex: 2, display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 0, marginBottom: 60, borderTop: '1px solid var(--line)' }}>
+        {courses.map((c, i) => (
+          <FadeUp key={c.series} delay={i * 0.1} direction={i === 0 ? 'left' : i === 2 ? 'right' : 'up'}>
+            <div style={{
+              padding: 'clamp(32px,4vw,52px) clamp(24px,3vw,48px)',
+              borderRight: i < 2 ? '1px solid var(--line)' : 'none',
+              display: 'flex', flexDirection: 'column', gap: 0,
+            }}>
+              {/* 序号 */}
+              <div style={{ fontFamily: 'var(--serif)', fontSize: 11, color: 'rgba(201,168,76,0.35)', letterSpacing: '0.20em', marginBottom: 24 }}>
+                0{i + 1}
               </div>
-            ))}
-          </div>
-        </FadeUp>
+              {/* 系列名 */}
+              <div style={{ fontSize: 10, letterSpacing: '0.26em', textTransform: 'uppercase', color: 'rgba(201,168,76,0.70)', marginBottom: 20 }}>{c.series}</div>
+              {/* 课程名 */}
+              <div style={{ fontFamily: 'var(--serif)', fontSize: 'clamp(17px,1.7vw,24px)', fontWeight: 400, color: 'var(--text)', letterSpacing: '0.04em', lineHeight: 1.65, whiteSpace: 'pre-line', marginBottom: 28 }}>{c.name}</div>
+              {/* 分隔线 */}
+              <div style={{ width: 28, height: 1, background: 'rgba(201,168,76,0.25)', marginBottom: 24 }} />
+              {/* 描述 */}
+              <p style={{ fontSize: 'clamp(12px,1.2vw,14px)', color: 'rgba(245,240,232,0.45)', lineHeight: 1.95, letterSpacing: '0.02em' }}>{c.desc}</p>
+            </div>
+          </FadeUp>
+        ))}
       </div>
+
     </section>
   )
 }

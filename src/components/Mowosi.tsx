@@ -58,36 +58,55 @@ export default function Mowosi() {
         </motion.div>
 
         {/* 核心文字（视差） */}
-        <motion.div style={{ position: 'relative', zIndex: 2, padding: '0 clamp(28px,5vw,80px) clamp(56px,7vw,100px)', y: textY }}>
+        <motion.div style={{ position: 'relative', zIndex: 2, padding: 'clamp(60px,8vw,120px) clamp(28px,5vw,80px) clamp(56px,7vw,100px)', y: textY }}>
 
-          <FadeUp>
-            <div className="sec-label">莫沃斯峰会</div>
-          </FadeUp>
+          {/* 标题 + slogan 横排 */}
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 'clamp(40px,5vw,80px)' }}>
 
-          <FadeUp delay={0.1}>
-            <div style={{
-              fontFamily: 'var(--serif)',
-              fontSize: 'clamp(72px,10vw,148px)',
-              fontWeight: 300, letterSpacing: '0.06em', lineHeight: 0.92,
-              color: 'var(--text)', marginTop: 20,
-            }}>
-              莫沃斯<br />
-              <span style={{ fontSize: '0.42em', color: 'var(--gold)', letterSpacing: '0.28em', display: 'inline-block', marginTop: '0.3em' }}>
-                MOWOSI
-              </span>
-            </div>
-          </FadeUp>
+            <FadeUp delay={0.1}>
+              <div style={{
+                fontFamily: 'var(--serif)',
+                fontSize: 'clamp(72px,10vw,148px)',
+                fontWeight: 300, letterSpacing: '0.06em', lineHeight: 0.92,
+                color: 'var(--text)', flexShrink: 0,
+              }}>
+                莫沃斯<br />
+                <span style={{ fontSize: '0.42em', color: 'var(--gold)', letterSpacing: '0.14em', display: 'inline-block', marginTop: '0.22em' }}>
+                  MOWOSI
+                </span>
+              </div>
+            </FadeUp>
 
-          <FadeUp delay={0.2}>
-            <p style={{
-              fontSize: 'clamp(15px,1.55vw,19px)', color: 'var(--muted)',
-              lineHeight: 2.0, maxWidth: 520, marginTop: 32,
-              borderLeft: '2px solid rgba(201,168,76,0.45)', paddingLeft: 24,
-            }}>
-              为认真对待身体的人，打造一场有深度的对话。<br />
-              每年一届，以莫干山为场域，聚合运动者、科学家与思考者。
-            </p>
-          </FadeUp>
+            {/* 竖线分隔 + slogan */}
+            <FadeUp delay={0.25}>
+              <div style={{ display: 'flex', alignItems: 'flex-end', gap: 'clamp(20px,2.5vw,36px)', paddingBottom: 6 }}>
+                <div style={{
+                  width: 1, alignSelf: 'stretch', minHeight: 80,
+                  background: 'linear-gradient(to bottom, transparent 0%, rgba(201,168,76,0.55) 25%, rgba(201,168,76,0.55) 100%)',
+                }} />
+                <div>
+                  <div style={{
+                    fontSize: 9, letterSpacing: '0.32em', textTransform: 'uppercase',
+                    color: 'rgba(201,168,76,0.50)', marginBottom: 16,
+                  }}>峰会宣言</div>
+                  <p style={{
+                    fontSize: 'clamp(14px,1.4vw,18px)', color: 'rgba(245,240,232,0.70)',
+                    fontWeight: 300, letterSpacing: '0.08em', lineHeight: 2.0,
+                    maxWidth: 300, margin: 0,
+                  }}>
+                    为认真对待身体的人，<br />
+                    打造一场有深度的对话。
+                  </p>
+                  <p style={{
+                    fontSize: 'clamp(12px,1.1vw,14px)', color: 'rgba(245,240,232,0.35)',
+                    letterSpacing: '0.06em', lineHeight: 1.9, marginTop: 20,
+                  }}>
+                    每年一届，以莫干山为场域，<br />聚合运动者、科学家与思考者。
+                  </p>
+                </div>
+              </div>
+            </FadeUp>
+          </div>
 
           {/* 峰会概览数据 */}
           <FadeUp delay={0.3}>
@@ -122,7 +141,7 @@ export default function Mowosi() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0 clamp(32px,4vw,64px)' }}>
           {formats.map((f, i) => (
-            <FadeUp key={i} delay={i * 0.07}>
+            <FadeUp key={i} delay={i * 0.07} direction={i % 3 === 0 ? 'left' : i % 3 === 2 ? 'right' : 'up'}>
               <div style={{ paddingBottom: 44, borderBottom: i < 3 ? '1px solid var(--line)' : 'none', marginBottom: i < 3 ? 44 : 0 }}>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 16 }}>
                   <span style={{ fontFamily: 'var(--serif)', fontSize: 11, color: 'rgba(201,168,76,0.40)', letterSpacing: '0.10em' }}>{f.mark}</span>
@@ -136,25 +155,76 @@ export default function Mowosi() {
         </div>
 
         {/* 结尾召唤语 */}
-        <FadeUp delay={0.2}>
-          <div style={{
-            marginTop: 'clamp(64px,8vw,100px)', textAlign: 'center',
-            paddingTop: 'clamp(48px,6vw,80px)', borderTop: '1px solid var(--line)',
-          }}>
-            <div style={{
-              fontFamily: 'var(--serif)',
-              fontSize: 'clamp(36px,5vw,72px)',
-              fontWeight: 300, letterSpacing: '0.08em', lineHeight: 1.15,
-              color: 'var(--text)', marginBottom: 24,
-            }}>
-              山野之上<br />
-              <span style={{ color: 'var(--gold)' }}>思想相遇</span>
-            </div>
-            <p style={{ fontSize: 14, color: 'var(--muted)', letterSpacing: '0.10em', lineHeight: 2.0 }}>
-              莫沃斯峰会 · 2026 · 莫干山 · 浙江德清
-            </p>
-          </div>
-        </FadeUp>
+        <div style={{ marginTop: 'clamp(80px,10vw,120px)', textAlign: 'center', position: 'relative' }}>
+
+          {/* 装饰性极淡大字背景 */}
+          <div aria-hidden style={{
+            position: 'absolute', top: '50%', left: '50%',
+            transform: 'translate(-50%, -50%)',
+            fontFamily: 'var(--serif)',
+            fontSize: 'clamp(160px,22vw,320px)',
+            fontWeight: 700, color: 'rgba(201,168,76,0.03)',
+            lineHeight: 1, userSelect: 'none', pointerEvents: 'none',
+            letterSpacing: '-0.02em', whiteSpace: 'nowrap',
+          }}>MOWOSI</div>
+
+          {/* 逐字进场主标题 */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            style={{ position: 'relative', zIndex: 1 }}
+          >
+            {[
+              [{ ch: '山', gold: false }, { ch: '野', gold: false }, { ch: '之', gold: false }, { ch: '上', gold: false }],
+              [{ ch: '思', gold: true  }, { ch: '想', gold: true  }, { ch: '相', gold: true  }, { ch: '遇', gold: true  }],
+            ].map((line, li) => (
+              <div key={li} style={{ display: 'flex', justifyContent: 'center' }}>
+                {line.map(({ ch, gold }, ci) => {
+                  const i = li * 4 + ci
+                  return (
+                    <motion.span
+                      key={i}
+                      custom={i}
+                      variants={{
+                        hidden: { opacity: 0, y: 40, filter: 'blur(6px)' },
+                        visible: (i: number) => ({
+                          opacity: 1, y: 0, filter: 'blur(0px)',
+                          transition: { duration: 0.9, delay: 0.1 + i * 0.08, ease: [0.22, 1, 0.36, 1] },
+                        }),
+                      }}
+                      style={{
+                        display: 'inline-block',
+                        fontFamily: 'var(--serif)',
+                        fontSize: 'clamp(52px,7vw,108px)',
+                        fontWeight: 300, letterSpacing: '0.10em', lineHeight: 1.1,
+                        color: gold ? 'var(--gold)' : 'var(--text)',
+                      }}
+                    >
+                      {ch}
+                    </motion.span>
+                  )
+                })}
+              </div>
+            ))}
+          </motion.div>
+
+          {/* 落款 */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.0, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              marginTop: 36, fontSize: 12,
+              color: 'rgba(201,168,76,0.45)',
+              letterSpacing: '0.28em', lineHeight: 2.0,
+              position: 'relative', zIndex: 1,
+            }}
+          >
+            莫沃斯峰会 · 2026 · 莫干山 · 浙江德清
+          </motion.p>
+        </div>
       </div>
 
     </section>

@@ -3,9 +3,14 @@ import { useEffect, useState } from 'react'
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 60)
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      setProgress(max > 0 ? window.scrollY / max : 0)
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -13,9 +18,10 @@ export default function Nav() {
   const links = [
     { href: '#about', label: '关于' },
     { href: '#pillars', label: '三大支柱' },
+    { href: '#academy', label: '山野梦想家' },
+    { href: '#race', label: '赛事' },
+    { href: '#reasons', label: '100 个理由' },
     { href: '#mowosi', label: '莫沃斯' },
-    { href: '#academy', label: '商学院' },
-    { href: '#ecosystem', label: '生态' },
   ]
 
   return (
@@ -28,6 +34,15 @@ export default function Nav() {
       borderBottom: '1px solid var(--line)',
       transition: 'background 0.3s',
     }}>
+      {/* scroll progress bar */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0,
+        height: 1,
+        width: `${progress * 100}%`,
+        background: 'linear-gradient(90deg, rgba(201,168,76,0.5), var(--gold))',
+        transition: 'width 0.12s linear',
+        pointerEvents: 'none',
+      }} />
       <a href="#hero" style={{
         fontFamily: 'var(--serif)', fontWeight: 400, fontSize: 15,
         letterSpacing: '0.22em', color: 'var(--text)', textDecoration: 'none',

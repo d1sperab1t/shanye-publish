@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import FadeUp from './FadeUp'
 
 const pillars = [
@@ -25,16 +27,21 @@ const pillars = [
 ]
 
 export default function Pillars() {
-  return (
-    <div style={{ position: 'relative', overflow: 'hidden' }}>
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start end', 'end start'] })
+  const bgY = useTransform(scrollYProgress, [0, 1], ['8%', '-8%'])
 
-      {/* 背景图 */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 0,
+  return (
+    <div ref={sectionRef} style={{ position: 'relative', overflow: 'hidden' }}>
+
+      {/* 背景图（视差） */}
+      <motion.div style={{
+        position: 'absolute', inset: '-10% 0', zIndex: 0,
         backgroundImage: 'url(/assets/p3.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center 30%',
         filter: 'saturate(0.35) brightness(0.28)',
+        y: bgY,
       }} />
 
       {/* 磨砂质感：噪点叠层 */}
@@ -65,7 +72,7 @@ export default function Pillars() {
 
       {/* 内容 */}
       <div style={{ position: 'relative', zIndex: 3 }}>
-        <section id="pillars" style={{ paddingBottom: 0 }}>
+        <section id="pillars">
           <FadeUp><div className="sec-label">核心体系</div></FadeUp>
           <FadeUp delay={0.1}><h2 className="sec-title">三大支柱</h2></FadeUp>
           <FadeUp delay={0.2}>
@@ -73,23 +80,17 @@ export default function Pillars() {
           </FadeUp>
         </section>
 
-        <div className="pillars-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 2 }}>
+        <div className="pillars-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 0 }}>
           {pillars.map((p, i) => (
-            <FadeUp key={p.num} delay={i * 0.1}>
+            <FadeUp key={p.num} delay={i * 0.12} direction={i === 0 ? 'left' : i === 2 ? 'right' : 'up'}>
               <div style={{
-                padding: '52px 40px 56px', position: 'relative',
-                border: '1px solid var(--line)', transition: 'border-color 0.3s', height: '100%',
+                padding: '52px 40px 56px',
+                minHeight: '520px',
                 display: 'flex', flexDirection: 'column',
-                background: 'rgba(8,16,10,0.30)',
-                backdropFilter: 'blur(2px)',
-              }}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.5)')}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--line)')}
-              >
-                {/* 序号 */}
+                boxSizing: 'border-box',
+              }}>
                 <div style={{ fontSize: 10, letterSpacing: '0.24em', color: 'rgba(201,168,76,0.5)', marginBottom: 48 }}>{p.num}</div>
 
-                {/* 主标题 */}
                 <div style={{ marginBottom: 'auto' }}>
                   <div style={{
                     fontFamily: 'var(--serif)', fontSize: 'clamp(48px,4.5vw,72px)',
@@ -117,7 +118,6 @@ export default function Pillars() {
                   }}>{p.desc}</p>
                 </div>
 
-                {/* 关键词 */}
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 40 }}>
                   {p.kws.map(k => (
                     <span key={k} style={{

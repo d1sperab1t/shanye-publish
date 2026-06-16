@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import FadeUp from './FadeUp'
 import Counter from './Counter'
 
@@ -17,7 +18,7 @@ const statusStyle: Record<string, React.CSSProperties> = {
 export default function Race() {
   return (
     <section id="race">
-      <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 'clamp(60px,6vw,120px)', alignItems: 'end', marginBottom: 64 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 'clamp(60px,6vw,120px)', alignItems: 'center', marginBottom: 64 }}>
         <div>
           <FadeUp><div className="sec-label">莫干山赛事</div></FadeUp>
           <FadeUp delay={0.1}>
@@ -66,15 +67,15 @@ export default function Race() {
       </div>
 
       <FadeUp delay={0.1}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 0 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 0, marginLeft: 'calc(-1 * max(3vw, 48px))', marginRight: 'calc(-1 * max(3vw, 48px))' }}>
           {races.map(r => (
-            <div key={r.grainId} style={{
-              overflow: 'hidden', background: `#0a0e0a url(${r.img}) center/cover`,
-              position: 'relative', height: 'clamp(320px,36vw,500px)', display: 'flex', flexDirection: 'column',
-              transition: 'transform 0.4s',
-            }}
-              onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.005)')}
-              onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+            <motion.div key={r.grainId}
+              whileHover={{ scale: 1.015 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                overflow: 'hidden', background: `#0a0e0a url(${r.img}) center/cover`,
+                position: 'relative', height: 'clamp(320px,36vw,500px)', display: 'flex', flexDirection: 'column',
+              }}
             >
               {/* gradient overlay */}
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(4,8,4,0.22) 0%, rgba(4,8,4,0.08) 25%, rgba(4,8,4,0.55) 65%, rgba(4,8,4,0.88) 100%)', zIndex: 0 }}/>
@@ -98,7 +99,7 @@ export default function Race() {
                 <div style={{ fontSize: 11, letterSpacing: '0.14em', color: 'rgba(245,240,232,0.60)', textTransform: 'uppercase', marginBottom: 24 }}>{r.date}</div>
                 <span style={{ display: 'inline-block', fontSize: 10, letterSpacing: '0.18em', padding: '4px 14px', textTransform: 'uppercase', ...statusStyle[r.statusClass] }}>{r.status}</span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </FadeUp>
